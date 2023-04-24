@@ -14,29 +14,33 @@
 
         <div class="container"
             style="margin-top: 10px; width: 100%; background-color:rgba(5, 28, 51, 0.473); border: solid; border-radius: 10px; border-color: rgb(42, 63, 83); ">
-            
+
             <button class="btn btn-success"
                 style="width: 100%; height: 6vh; font-size: 30px; margin-bottom: 10px; margin-top: 10px;"
                 onclick="randomCode()">Generate Response Code</button>
             <input class="form-control" style="text-align: center; font-size: 30px; margin-bottom: 10px;"
                 id="response-code" readonly="readonly" />
-            <button class="btn btn-success" style="width: 100%; height: 6vh; font-size: 30px;" onclick="checkAnswer()">Check Answers</button>
+            <button class="btn btn-success" style="width: 100%; height: 6vh; font-size: 30px;"
+                onclick="checkAnswer()">Check Answers</button>
+
+            <div id="snackbar">Woooo Correct</div>
+            <div id="snackbar-2">Wrong!</div>
 
             <label style="color: whitesmoke; margin-top: 10px;">A.</label>
             <textarea class="form-control"
-                style="text-align: center; font-size: 30px; margin-top: 10px; margin-bottom: 10px; resize: none; border: solid; border-color: #31313186;"
+                style="text-align: center; font-size: 30px; margin-top: 10px; margin-bottom: 10px; resize: none; border: solid; border-color: #31313186; cursor: pointer;"
                 id="response-answer" readonly="readonly">
             </textarea>
 
             <label style="color: whitesmoke;">B.</label>
             <textarea class="form-control"
-                style="text-align: center; font-size: 30px; margin-top: 10px; margin-bottom: 10px; resize: none; border: solid; border-color: #31313186;"
+                style="text-align: center; font-size: 30px; margin-top: 10px; margin-bottom: 10px; resize: none; border: solid; border-color: #31313186; cursor: pointer;"
                 id="response-answer-2" readonly="readonly">
             </textarea>
 
             <label style="color: whitesmoke;">C.</label>
             <textarea class="form-control"
-                style="text-align: center; font-size: 30px; margin-top: 10px; margin-bottom: 10px; resize: none; border: solid; border-color: #31313186;"
+                style="text-align: center; font-size: 30px; margin-top: 10px; margin-bottom: 10px; resize: none; border: solid; border-color: #31313186; cursor: pointer;"
                 id="response-answer-3" readonly="readonly">
             </textarea>
         </div>
@@ -44,6 +48,20 @@
 </body>
 
 <script>
+
+    function showCorrectToast() {
+        var x = document.getElementById("snackbar");
+        x.className = "show";
+
+        setTimeout(function () { x.className = x.className.replace("show", ""); }, 3000);
+    }
+
+    function showWrongToast() {
+        var x = document.getElementById("snackbar-2");
+        x.className = "show";
+
+        setTimeout(function () { x.className = x.className.replace("show", ""); }, 3000);
+    }
 
     $("#response-answer").on("click", function (e) {
 
@@ -193,37 +211,77 @@
     function checkAnswer() {
 
         if (responseCodeInput.value == "200" & document.getElementById("response-answer").style.backgroundColor === "orange" & responseAnswerInput.value === "This is the standard response for successful HTTP requests. The actual meaning of the response depends on the request method used.") {
-            
+
+            showCorrectToast()
+            $("#response-answer").delay(3000).css("background-color", "green").css("color", "whitesmoke");
+            $("#response-answer-2").delay(3000).css("background-color", "red").css("color", "whitesmoke");
+            $("#response-answer-3").delay(3000).css("background-color", "red").css("color", "whitesmoke");
             console.log("Correct")
         }
-        else if (responseCodeInput.value == "201" & document.getElementById("response-answer").style.backgroundColor === "orange" &  responseAnswerInput.value === "The request succeeded and a new resource was created. This is usually the response after POST or PUT requests.") {
+        else if (responseCodeInput.value == "201" & document.getElementById("response-answer").style.backgroundColor === "orange" & responseAnswerInput.value === "The request succeeded and a new resource was created. This is usually the response after POST or PUT requests.") {
 
+            showCorrectToast()
+            $("#response-answer").delay(3000).css("background-color", "green").css("color", "whitesmoke");
+            $("#response-answer-2").delay(3000).css("background-color", "red").css("color", "whitesmoke");
+            $("#response-answer-3").delay(3000).css("background-color", "red").css("color", "whitesmoke");
             console.log("Correct")
         }
-        else if (responseCodeInput.value == "202" & document.getElementById("response-answer").style.backgroundColor === "orange" &  responseAnswerInput.value === "The request was accepted but is still in progress. It’s used for cases where another server handles the request or for batch processing.") {
+        else if (responseCodeInput.value == "202" & document.getElementById("response-answer").style.backgroundColor === "orange" & responseAnswerInput.value === "The request was accepted but is still in progress. It’s used for cases where another server handles the request or for batch processing.") {
 
+            showCorrectToast()
+            $("#response-answer").delay(3000).css("background-color", "green").css("color", "whitesmoke");
+            $("#response-answer-2").delay(3000).css("background-color", "red").css("color", "whitesmoke");
+            $("#response-answer-3").delay(3000).css("background-color", "red").css("color", "whitesmoke");
             console.log("Correct")
         }
-        else if (responseCodeInput.value == "401" & document.getElementById("response-answer").style.backgroundColor === "orange" &  responseAnswerInput.value === "The user doesn’t have valid authentication credentials to get the requested resource.") {
+        else if (responseCodeInput.value == "401" & document.getElementById("response-answer").style.backgroundColor === "orange" & responseAnswerInput.value === "The user doesn’t have valid authentication credentials to get the requested resource.") {
 
+            showCorrectToast()
+            $("#response-answer").delay(3000).css("background-color", "green").css("color", "whitesmoke");
+            $("#response-answer-2").delay(3000).css("background-color", "red").css("color", "whitesmoke");
+            $("#response-answer-3").delay(3000).css("background-color", "red").css("color", "whitesmoke");
             console.log("Correct")
         }
-        else if (responseCodeInput.value == "404" & document.getElementById("response-answer").style.backgroundColor === "orange" &  responseAnswerInput.value === "The server can’t find the requested resource, and no redirection has been set.") {
+        else if (responseCodeInput.value == "404" & document.getElementById("response-answer").style.backgroundColor === "orange" & responseAnswerInput.value === "The server can’t find the requested resource, and no redirection has been set.") {
 
+            showCorrectToast()
+            $("#response-answer").delay(3000).css("background-color", "green").css("color", "whitesmoke");
+            $("#response-answer-2").delay(3000).css("background-color", "red").css("color", "whitesmoke");
+            $("#response-answer-3").delay(3000).css("background-color", "red").css("color", "whitesmoke");
             console.log("Correct")
         }
-        else if (responseCodeInput.value == "500" & document.getElementById("response-answer").style.backgroundColor === "orange" &  responseAnswerInput.value === "The server has encountered an unexpected error and cannot complete the request.") {
+        else if (responseCodeInput.value == "500" & document.getElementById("response-answer").style.backgroundColor === "orange" & responseAnswerInput.value === "The server has encountered an unexpected error and cannot complete the request.") {
 
+            showCorrectToast()
+            $("#response-answer").delay(3000).css("background-color", "green").css("color", "whitesmoke");
+            $("#response-answer-2").delay(3000).css("background-color", "red").css("color", "whitesmoke");
+            $("#response-answer-3").delay(3000).css("background-color", "red").css("color", "whitesmoke");
             console.log("Correct")
         }
-        else if (responseCodeInput.value == "100" & document.getElementById("response-answer").style.backgroundColor === "orange" &  responseAnswerInput.value === "This interim status code means the server received the initial request, and the client should continue.") {
+        else if (responseCodeInput.value == "100" & document.getElementById("response-answer").style.backgroundColor === "orange" & responseAnswerInput.value === "This interim status code means the server received the initial request, and the client should continue.") {
 
+            showCorrectToast()
+            $("#response-answer").delay(3000).css("background-color", "green").css("color", "whitesmoke");
+            $("#response-answer-2").delay(3000).css("background-color", "red").css("color", "whitesmoke");
+            $("#response-answer-3").delay(3000).css("background-color", "red").css("color", "whitesmoke");
             console.log("Correct")
         }
         else if (responseCodeInput.value == "204") {
             responseAnswerInput.value = "The request was successfully processed, but there is no content. The headers may be useful."
 
+            showCorrectToast()
+            $("#response-answer").delay(3000).css("background-color", "green").css("color", "whitesmoke");
+            $("#response-answer-2").delay(3000).css("background-color", "red").css("color", "whitesmoke");
+            $("#response-answer-3").delay(3000).css("background-color", "red").css("color", "whitesmoke");
             console.log("Correct")
+        }
+        else if (document.getElementById("response-answer").style.backgroundColor === "whitesmoke") {
+
+            showWrongToast()
+            $("#response-answer").delay(3000).css("background-color", "green").css("color", "whitesmoke");
+            $("#response-answer-2").delay(3000).css("background-color", "red").css("color", "whitesmoke");
+            $("#response-answer-3").delay(3000).css("background-color", "red").css("color", "whitesmoke");
+            console.log("pick a answer")
         }
         else {
             console.log("Wrong")
