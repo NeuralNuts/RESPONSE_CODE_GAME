@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Response Code Game</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <link rel="stylesheet" href="index.css">
+</head>
+
+<body>
+    <div class="container" style="text-align: center;">
+        <h1 class="display-1">Whats The Response???</h1>
+
+        <div class="container"
+            style="margin-top: 10px; width: 100%; background-color:rgba(5, 28, 51, 0.473); border: solid; border-radius: 10px; border-color: rgb(42, 63, 83); ">
+            
+            <button class="btn btn-success"
+                style="width: 100%; height: 6vh; font-size: 30px; margin-bottom: 10px; margin-top: 10px;"
+                onclick="randomCode()">Generate Response Code</button>
+            <input class="form-control" style="text-align: center; font-size: 30px; margin-bottom: 10px;"
+                id="response-code" readonly="readonly" />
+            <button class="btn btn-success" style="width: 100%; height: 6vh; font-size: 30px;" onclick="checkAnswer()">Check Answers</button>
+
+            <label style="color: whitesmoke; margin-top: 10px;">A.</label>
+            <textarea class="form-control"
+                style="text-align: center; font-size: 30px; margin-top: 10px; margin-bottom: 10px; resize: none; border: solid; border-color: #31313186;"
+                id="response-answer" readonly="readonly">
+            </textarea>
+
+            <label style="color: whitesmoke;">B.</label>
+            <textarea class="form-control"
+                style="text-align: center; font-size: 30px; margin-top: 10px; margin-bottom: 10px; resize: none; border: solid; border-color: #31313186;"
+                id="response-answer-2" readonly="readonly">
+            </textarea>
+
+            <label style="color: whitesmoke;">C.</label>
+            <textarea class="form-control"
+                style="text-align: center; font-size: 30px; margin-top: 10px; margin-bottom: 10px; resize: none; border: solid; border-color: #31313186;"
+                id="response-answer-3" readonly="readonly">
+            </textarea>
+        </div>
+    </div>
+</body>
+
+<script>
+
+    $("#response-answer").on("click", function (e) {
+
+        $("#response-answer-2").delay(3000).css("background-color", "whitesmoke").css("color", "black");
+        $("#response-answer-3").delay(3000).css("background-color", "whitesmoke").css("color", "black");
+        $("#response-answer").delay(3000).css("background-color", "orange").css("color", "whitesmoke");
+    })
+
+    $("#response-answer-2").on("click", function (e) {
+
+        $("#response-answer").delay(3000).css("background-color", "whitesmoke").css("color", "black");
+        $("#response-answer-3").delay(3000).css("background-color", "whitesmoke").css("color", "black");
+        $("#response-answer-2").delay(3000).css("background-color", "orange").css("color", "whitesmoke");
+    })
+
+    $("#response-answer-3").on("click", function (e) {
+
+        $("#response-answer").delay(3000).css("background-color", "whitesmoke").css("color", "black");
+        $("#response-answer-2").delay(3000).css("background-color", "whitesmoke").css("color", "black");
+        $("#response-answer-3").delay(3000).css("background-color", "orange").css("color", "whitesmoke");
+    })
+
+    function shuffle(array) {
+        for (let i = array.length - 1; i > 0; i--) {
+            let j = Math.floor(Math.random() * (i + 1));
+            [array[i], array[j]] = [array[j], array[i]];
+        }
+    }
+
+    function randomCode() {
+        responseCodeInput = document.getElementById("response-code")
+        responseAnswerInput = document.getElementById("response-answer")
+        let array = ["200", "201", "202", "401", "404", "500", "100", "204"];
+
+        shuffle(array);
+
+        for (let key in array) {
+
+            shuffle(array[key]);
+            responseCodeInput.value = array[key]
+
+            codeAnswer();
+        }
+        $("#response-answer").delay(3000).css("background-color", "whitesmoke").css("color", "black");
+        $("#response-answer-2").delay(3000).css("background-color", "whitesmoke").css("color", "black");
+        $("#response-answer-3").delay(3000).css("background-color", "whitesmoke").css("color", "black");
+    }
+
+    function codeAnswer() {
+        responseCodeInput = document.getElementById("response-code")
+        responseAnswerInput = document.getElementById("response-answer")
+        responseAnswerInput_2 = document.getElementById("response-answer-2")
+        responseAnswerInput_3 = document.getElementById("response-answer-3")
+
+        const res_200 = "This is the standard response for successful HTTP requests. The actual meaning of the response depends on the request method used."
+        const res_201 = "The request succeeded and a new resource was created. This is usually the response after POST or PUT requests."
+        const res_202 = "The request was accepted but is still in progress. It’s used for cases where another server handles the request or for batch processing."
+        const res_401 = "The user doesn’t have valid authentication credentials to get the requested resource."
+        const res_404 = "The server can’t find the requested resource, and no redirection has been set."
+        const res_500 = "The server has encountered an unexpected error and cannot complete the request."
+        const res_100 = "This interim status code means the server received the initial request, and the client should continue."
+        const res_204 = "The request was successfully processed, but there is no content. The headers may be useful."
+
+        let array = ["200", "201", "202", "401", "404", "500", "100", "204"];
+        let answer_array = [res_200, res_201, res_202, res_401, res_404, res_500, res_100, res_204];
+
+        shuffle(array);
+        shuffle(answer_array)
+
+        for (let key in array) {
+            shuffle(array[key]);
+        }
+
+        for (let answer in answer_array) {
+            shuffle(answer_array[answer])
+
+            if (responseCodeInput.value == "200") {
+                responseAnswerInput.value = "This is the standard response for successful HTTP requests. The actual meaning of the response depends on the request method used."
+
+                if (answer_array[answer] != res_200) {
+                    responseAnswerInput_2.value = answer_array[answer]
+                }
+            }
+            else if (responseCodeInput.value == "201") {
+                responseAnswerInput.value = "The request succeeded and a new resource was created. This is usually the response after POST or PUT requests."
+
+                if (answer_array[answer] != res_201) {
+                    responseAnswerInput_2.value = answer_array[answer]
+                }
+            }
+            else if (responseCodeInput.value == "202") {
+                responseAnswerInput.value = "The request was accepted but is still in progress. It’s used for cases where another server handles the request or for batch processing."
+
+                if (answer_array[answer] != res_202) {
+                    responseAnswerInput_2.value = answer_array[answer]
+                }
+            }
+            else if (responseCodeInput.value == "401") {
+                responseAnswerInput.value = "The user doesn’t have valid authentication credentials to get the requested resource."
+
+                if (answer_array[answer] != res_401) {
+                    responseAnswerInput_2.value = answer_array[answer]
+                }
+            }
+            else if (responseCodeInput.value == "404") {
+                responseAnswerInput.value = "The server can’t find the requested resource, and no redirection has been set."
+
+                if (answer_array[answer] != res_404) {
+                    responseAnswerInput_2.value = answer_array[answer]
+                }
+            }
+            else if (responseCodeInput.value == "500") {
+                responseAnswerInput.value = "The server has encountered an unexpected error and cannot complete the request."
+
+                if (answer_array[answer] != res_500) {
+                    responseAnswerInput_2.value = answer_array[answer]
+                }
+            }
+            else if (responseCodeInput.value == "100") {
+                responseAnswerInput.value = "This interim status code means the server received the initial request, and the client should continue."
+
+                if (answer_array[answer] != res_100) {
+                    responseAnswerInput_2.value = answer_array[answer]
+                }
+            }
+            else if (responseCodeInput.value == "204") {
+                responseAnswerInput.value = "The request was successfully processed, but there is no content. The headers may be useful."
+
+                if (answer_array[answer] != res_204) {
+                    responseAnswerInput_2.value = answer_array[answer]
+                }
+            }
+            else {
+                responseAnswerInput.value = "Click Generate Code"
+            }
+        }
+
+        for (let answer in answer_array) {
+            shuffle(answer_array[answer])
+
+            if (answer_array[answer] != responseAnswerInput_2.value) {
+                responseAnswerInput_3.value = answer_array[answer]
+            }
+        }
+    }
+
+    function checkAnswer() {
+
+        if (responseCodeInput.value == "200" & document.getElementById("response-answer").style.backgroundColor === "orange" & responseAnswerInput.value === "This is the standard response for successful HTTP requests. The actual meaning of the response depends on the request method used.") {
+            
+            console.log("Correct")
+        }
+        else if (responseCodeInput.value == "201" & document.getElementById("response-answer").style.backgroundColor === "orange" &  responseAnswerInput.value === "The request succeeded and a new resource was created. This is usually the response after POST or PUT requests.") {
+
+            console.log("Correct")
+        }
+        else if (responseCodeInput.value == "202" & document.getElementById("response-answer").style.backgroundColor === "orange" &  responseAnswerInput.value === "The request was accepted but is still in progress. It’s used for cases where another server handles the request or for batch processing.") {
+
+            console.log("Correct")
+        }
+        else if (responseCodeInput.value == "401" & document.getElementById("response-answer").style.backgroundColor === "orange" &  responseAnswerInput.value === "The user doesn’t have valid authentication credentials to get the requested resource.") {
+
+            console.log("Correct")
+        }
+        else if (responseCodeInput.value == "404" & document.getElementById("response-answer").style.backgroundColor === "orange" &  responseAnswerInput.value === "The server can’t find the requested resource, and no redirection has been set.") {
+
+            console.log("Correct")
+        }
+        else if (responseCodeInput.value == "500" & document.getElementById("response-answer").style.backgroundColor === "orange" &  responseAnswerInput.value === "The server has encountered an unexpected error and cannot complete the request.") {
+
+            console.log("Correct")
+        }
+        else if (responseCodeInput.value == "100" & document.getElementById("response-answer").style.backgroundColor === "orange" &  responseAnswerInput.value === "This interim status code means the server received the initial request, and the client should continue.") {
+
+            console.log("Correct")
+        }
+        else if (responseCodeInput.value == "204") {
+            responseAnswerInput.value = "The request was successfully processed, but there is no content. The headers may be useful."
+
+            console.log("Correct")
+        }
+        else {
+            console.log("Wrong")
+        }
+    }
+</script>
+
+</html>

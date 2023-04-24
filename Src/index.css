@@ -1,0 +1,14 @@
+body {
+    background-color: #234;
+}
+
+h1 {
+    color: rgb(240, 239, 239);
+    font-size: 80px; 
+    text-align: center;
+    text-transform: uppercase;
+    background-color: rgba(5, 28, 51, 0.473);
+    border: solid;
+    border-radius: 10px;
+    border-color: rgb(42, 63, 83);
+}
